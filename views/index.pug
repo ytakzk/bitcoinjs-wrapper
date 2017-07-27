@@ -1,0 +1,36 @@
+html
+  head
+    title HOW TO USE
+  body
+    h4 CREATE ADDRESS
+    p /create/:secretKey
+    ul
+      li secretKey: secret key
+    p
+      | return
+      | {
+      |  'address': 'bitcoin address',
+      |  "wif":"wif"
+      | }
+
+    h4 SEE BALANCE
+    p /balance/:secretKey
+    ul
+      li secretKey: secret key
+    p
+      | return
+      | {
+      |  'balance': 'sashoshis'
+      | }
+
+    h4 TRANSFER BITCOINS
+    p /transfer/:secretKey/:to/:amount
+    ul
+      li secretKey: secret key
+      li to: receiver's bitcoin address
+      li amount: satoshis
+    p
+      | return
+      | {
+      |  'txid': 'transaction id'
+      | }

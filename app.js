@@ -1,31 +1,16 @@
-const bitcoin = require('./bitcoin')
-const CONFIG  = require('./config')
-const api     = require('./api_service')
+var express = require('express')
+var app     = express()
+var path    = require('path')
+
+const router  = require('./router')
+
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'pug')
+
+app.use(router)
 
 process.on('unhandledRejection', console.dir)
 
-const secretKey = 'ytakzk'
-const user      = bitcoin.create(secretKey)
-const address   = user['address']
-const wif       = user['wif']
-
-console.log(address, wif)
-
-// get balance
-api.fetchBalance(address).then(function (balance) {
-  console.log(balance)
-})
-
-// get utxo
-api.fetchUTXO(address).then(function (utxos) {
-  console.log(utxos)
-})
-
-// transfer bitcoins
-api.fetchUTXO(address).then(function (utxos) {
-
-  rawtx = bitcoin.createTransaction(secretKey, 'mwCwTceJvYV27KXBc3NJZys6CjsgsoeHmf', 10000, 1000, utxos)
-  api.transaction(rawtx).then(function (value) {
-    console.log(value)
-  })
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!')
 })
